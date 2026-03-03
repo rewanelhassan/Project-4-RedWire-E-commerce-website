@@ -111,8 +111,8 @@ function drawfav_items(){
     let y = fav_items.map( item => {
          let product = products.find(p => p.id === item)
          if(!product) return "";
-        return` <div class="col-md-3 col-sm-4">
-            <div class="fav-item rounded-1 text-center shadow bg-light mx-1" id="${item}">
+        return` <div class="col-sm-4 col-md-3">
+            <div class="fav-item rounded-1 text-center shadow bg-light mx-1 " id="${item}">
               <img
                 class="img-fluid mb-2 rounded-1"
                 src="${product.imgURL}"

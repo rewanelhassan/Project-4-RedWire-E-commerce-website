@@ -1,36 +1,37 @@
 
-
 let dropdown_search = document.getElementById("dropdown-search");
 let dropdown_items = document.querySelectorAll(".dropdown-ops");
+let searchInput = document.getElementById("search");
 
-let type = "title"; 
-dropdown_search.innerHTML = "Search product by name"; 
+let searchType = "title"; 
 
 
 dropdown_items.forEach(item => {
     item.addEventListener("click", function (e) {
         e.preventDefault();
-        dropdown_search.innerHTML = this.textContent;
+        dropdown_search.innerHTML = this.textContent; 
 
-        type = (this.textContent === "Name") ? "title" : "category";
+        if (this.textContent.toLowerCase().includes("category")) {
+            searchType = "category";
+        } else {
+            searchType = "title";
+        }
     });
 });
 
-let name_op=document.querySelector(".name-op")
-let category_op=document.querySelector(".category-op")
-let search =document.getElementById("search")
-search.addEventListener("input",function(){
-    let type =  (dropdown_search.innerHTML===name_op.textContent)? "title" : "category";
+
+searchInput.addEventListener("input", function () {
     let query = this.value.toLowerCase();
-    let filteredproducts= products.filter((product)=>{
-        if(!product[type]) return false;
-        return product[type].toLowerCase().includes(query);
-    });
-    drawProducts(filteredproducts);
     
+    let filteredProducts = products.filter((product) => {
+        
+        if (!product[searchType]) return false;
+        
+        return product[searchType].toLowerCase().includes(query);
+    });
 
-})
-
+    drawProducts(filteredProducts); 
+});
 
 
 
@@ -155,7 +156,7 @@ function drawProducts(itemtoshow=products){
         let inCart = cart.find( i => i.id===item.id)
         let infav = fav_items.includes(item.id)
         return`
-       <div class="col-md-4 col-sm-6">
+       <div class="col-sm-1 col-md-6 col-lg-4">
             <div class="product-item rounded text-center shadow bg-light ">
                 <img class="img-fluid mb-2 rounded" src="${item.imgURL}" alt="" />
                 <div class="product-item-content my-2 fs-6">
